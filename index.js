@@ -16,27 +16,26 @@ const app = express();
 dotenv.config();
 const port = process.env.PORT;
 
-// cors (so tricky de msh ka3da 3ama shof mn awl min 09 fe el videos)
-const whitelist = ["http://127.0.0.0:5000"];
+// cors
+const whitelist = ["http://127.0.0.1:5000"];
 app.use((req, res, next) => {
   console.log(req.header("origin"));
 
   if (req.originalUrl.includes("/auth/verificationLink")) {
     res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "GET");
+  } else {
+    if (!whitelist.includes(req.header("origin"))) {
+      return next(new Error("Blocked By CORS"));
+    }
+    res.setHeader("Access-Control-Allow-Origin", req.header("origin"));
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    res.setHeader("Access-Control-Allow-Headers", "*");
+    res.setHeader("Access-Control-Private-Network", true);
   }
-
-  if (!whitelist.includes(req.header("origin")))
-    return next(new Error("Blocked By Coris"));
+  next();
 });
 
-res.setHeader("Access-Control-Allow-Origin", "*");
-res.setHeader("Access-Control-Allow-Headers", "*");
-res.setHeader("Access-Control-Allow-Methods", "*");
-res.setHeader("Access-Control-Private-Network", true);
-return next();
-
-//parse
+// parse
 app.use(express.json());
 
 // connect to DB
@@ -57,12 +56,12 @@ app.use("/review", reviewRouter);
 
 // Not Found error
 app.all("*", (req, res) => {
-  return res.json({ success: false, message: "Page Not Found" });
+  return res.status(404).json({ success: false, message: "Page Not Found" });
 });
 
-// Global Error Handler (lazem ykon fe el a5r kda 2abl el listen)
+// Global Error Handler
 app.use((error, req, res, next) => {
-  return res.json({
+  return res.status(500).json({
     success: false,
     message: error.message,
     stack: error.stack,
