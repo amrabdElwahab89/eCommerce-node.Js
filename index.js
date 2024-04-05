@@ -17,23 +17,23 @@ dotenv.config();
 const port = process.env.PORT;
 
 // cors
-const whitelist = ["http://127.0.0.1:5000"];
-app.use((req, res, next) => {
-  console.log(req.header("origin"));
+// const whitelist = ["http://127.0.0.1:5000"];
+// app.use((req, res, next) => {
+//   console.log(req.header("origin"));
 
-  if (req.originalUrl.includes("/auth/verificationLink")) {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-  } else {
-    if (!whitelist.includes(req.header("origin"))) {
-      return next(new Error("Blocked By CORS"));
-    }
-    res.setHeader("Access-Control-Allow-Origin", req.header("origin"));
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-    res.setHeader("Access-Control-Allow-Headers", "*");
-    res.setHeader("Access-Control-Private-Network", true);
-  }
-  next();
-});
+//   if (req.originalUrl.includes("/auth/verificationLink")) {
+//     res.setHeader("Access-Control-Allow-Origin", "*");
+//   } else {
+//     if (!whitelist.includes(req.header("origin"))) {
+//       return next(new Error("Blocked By CORS"));
+//     }
+//     res.setHeader("Access-Control-Allow-Origin", req.header("origin"));
+//     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+//     res.setHeader("Access-Control-Allow-Headers", "*");
+//     res.setHeader("Access-Control-Private-Network", true);
+//   }
+//   next();
+// });
 
 // parse
 app.use(express.json());
