@@ -39,6 +39,6 @@ router.delete(
 );
 
 // 04-Show All Brands
-router.get("/allBrands", isAuthenticated, brandController.allBrands);
+router.get("/allBrands", brandController.allBrands);
 
 export default router;
