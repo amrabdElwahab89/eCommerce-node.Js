@@ -11,6 +11,7 @@ import cartRouter from "./src/modules/cart/cart.router.js";
 import createInvoice from "./src/utiles/pdfInvoice.js";
 import orderRouter from "./src/modules/order/order.router.js";
 import reviewRouter from "./src/modules/review/review.router.js";
+import cors from "cors";
 
 const app = express();
 dotenv.config();
@@ -34,6 +35,7 @@ const port = process.env.PORT;
 //   }
 //   next();
 // });
+app.use(cors());
 
 // parse
 app.use(express.json());
