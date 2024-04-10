@@ -6,7 +6,7 @@ const brandSchema = new Schema(
     slug: { type: String, required: true, unique: true },
     image: { id: { type: String }, url: { type: String } },
     createdBy: { type: Types.ObjectId, ref: "User", required: true },
-    brand: { type: Types.ObjectId, ref: "Brand", unique: true },
+    category: { type: Types.ObjectId, ref: "Category", unique: true },
   },
   { timestamps: true }
 );

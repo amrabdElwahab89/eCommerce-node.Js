@@ -33,6 +33,7 @@ export const createBrand = asyncHandler(async (req, res, next) => {
     slug: slugify(req.body.name),
     image: { id: public_id, url: secure_url },
     createdBy: req.user._id,
+    category: categoryId,
   });
 
   //  add brand in each [Category] (tary2 zay el zft el mafrod fe el brand model azawd category and subCategory badl el lafa de kolha)
