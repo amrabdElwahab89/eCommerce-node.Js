@@ -61,11 +61,10 @@ export const createProducts = asyncHandler(async (req, res, next) => {
 export const deleteProduct = asyncHandler(async (req, res, next) => {
   // get data
   const { productId } = req.params;
- 
 
   // check Product
   const product = await Product.findById(productId);
- 
+
   if (!product) return next(new Error("product is not exist"));
 
   // delete product from data base

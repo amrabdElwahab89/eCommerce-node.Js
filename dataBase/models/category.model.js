@@ -5,7 +5,7 @@ const categorySchema = new Schema(
     name: { type: String, required: true, unique: true },
     slug: { type: String, required: true },
     createdBy: { type: Types.ObjectId, ref: "User", required: true },
-    image: { id: { type: String }, URL: { type: String } },
+    image: { id: { type: String }, url: { type: String } },
     brand: { type: String, unique: true },
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }

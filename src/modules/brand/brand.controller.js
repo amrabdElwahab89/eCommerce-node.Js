@@ -9,10 +9,9 @@ export const createBrand = asyncHandler(async (req, res, next) => {
   // Check Categories
   const { categoryId } = req.body;
 
-  categoryId.forEach(async (element) => {
+  categoryId.forEach(async (ele) => {
     const category = await Category.findById(element);
-    if (!category)
-      return next(new Error(`category id ${element} is not found`));
+    if (!category) return next(new Error(`category id ${ele} is not found`));
   });
 
   // check File
