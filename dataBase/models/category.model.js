@@ -6,7 +6,7 @@ const categorySchema = new Schema(
     slug: { type: String, required: true },
     createdBy: { type: Types.ObjectId, ref: "User", required: true },
     image: { id: { type: String }, url: { type: String } },
-    brand: { type: String, unique: true },
+    // brand: { type: String, unique: true },
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
